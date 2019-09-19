@@ -93,13 +93,10 @@ class Manager {
    * @param attr is the attributes that will be sent to other Manager(include
    * ourselves)
    * @param role is one of RoleType enum
-   * @param need_publish Is need to publish out?
    * @return true if Join topology successfully
    * @return false if Join topology failed
    */
-  bool Join(const RoleAttributes& attr, RoleType role,
-            bool need_publish = true);
-
+  bool Join(const RoleAttributes& attr, RoleType role);
   /**
    * @brief Leave the topology
    *
@@ -160,6 +157,7 @@ class Manager {
   int process_id_;
   std::string channel_name_;
   eprosima::fastrtps::Publisher* publisher_;
+  std::mutex lock_;
   eprosima::fastrtps::Subscriber* subscriber_;
   SubscriberListener* listener_;
 
